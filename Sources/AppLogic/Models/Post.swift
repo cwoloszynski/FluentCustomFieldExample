@@ -24,10 +24,10 @@ final class Post: Model {
         content = try node.extract(Keys.content)
         
         // Ideally want to write
-        // postedOn = try node.extract(Keys.postedOn)
+        postedOn = try node.extract(Keys.postedOn)
         // But have to write instead
-        let interval: Int = try node.extract(Keys.postedOn)
-        postedOn = Date(timeIntervalSince1970: TimeInterval(interval))
+        // let interval: Int = try node.extract(Keys.postedOn)
+        // postedOn = Date(timeIntervalSince1970: TimeInterval(interval))
     }
 
     func makeNode(context: Context) throws -> Node {
