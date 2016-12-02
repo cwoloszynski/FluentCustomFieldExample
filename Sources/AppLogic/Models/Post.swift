@@ -34,7 +34,7 @@ final class Post: Model {
         return try Node(node: [
             Keys.id: id,
             Keys.content: content,
-            Keys.postedOn: Int(postedOn.timeIntervalSince1970)
+            Keys.postedOn: Int(postedOn.timeIntervalSince1970) // Willing to use Double or Int for this conversion
         ])
     }
 }
