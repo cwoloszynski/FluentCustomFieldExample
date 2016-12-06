@@ -22,19 +22,15 @@ final class Post: Model {
     init(node: Node, in context: Context) throws {
         id = try node.extract(Keys.id)
         content = try node.extract(Keys.content)
-        
-        // Ideally want to write
         postedOn = try node.extract(Keys.postedOn)
-        // But have to write instead
-        // let interval: Int = try node.extract(Keys.postedOn)
-        // postedOn = Date(timeIntervalSince1970: TimeInterval(interval))
     }
 
     func makeNode(context: Context) throws -> Node {
+        
         return try Node(node: [
             Keys.id: id,
             Keys.content: content,
-            Keys.postedOn: Int(postedOn.timeIntervalSince1970) // Willing to use Double or Int for this conversion
+            Keys.postedOn: postedOn
         ])
     }
 }

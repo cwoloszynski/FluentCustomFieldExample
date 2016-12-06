@@ -1,24 +1,28 @@
 import Foundation
 import Node
 
+extension Date: NodeRepresentable {
+    /**
+     Turn the convertible into a node
+     
+     - throws: if convertible can not create a Node
+     - returns: a node if possible
+     */
+    public func makeNode(context: Context) throws -> Node {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let string = dateFormatter.string(from:self)
+        
+        return Node(string)
+    }
+}
+
 extension Date: NodeInitializable {
-    
+
     public init(node: Node, in context: Context) throws {
         
         switch (node) {
-        case .number (let number):
-            switch (number) {
-            case .int(let secondsSince1970):
-                self = Date(timeIntervalSince1970: TimeInterval(secondsSince1970))
-                return
-            case .double(let secondsSince1970):
-                self = Date(timeIntervalSince1970: secondsSince1970)
-                return
-            default:
-                break
-            }
         case .string (let string):
-            // JSON requires a specific Date format
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             guard let date = dateFormatter.date(from: string) else {
